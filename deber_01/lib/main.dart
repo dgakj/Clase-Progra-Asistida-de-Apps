@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
 
+import 'data/repositories/contador_prefs_repository.dart';
+import 'domain/usecases/decrementar.dart';
+import 'domain/usecases/incrementar.dart';
+import 'domain/usecases/obtener_contador.dart';
+import 'presentation/pantallas/pantalla_visor.dart';
+
 void main() {
-  runApp(const MyApp());
+  final repository = ContadorPrefsRepository();
+  final obtenerContador = ObtenerContador(repository);
+  final incrementar = Incrementar(repository);
+  final decrementar = Decrementar(repository);
+
+  runApp(
+    MyApp(
+      obtenerContador: obtenerContador,
+      incrementar: incrementar,
+      decrementar: decrementar,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.obtenerContador,
+    required this.incrementar,
+    required this.decrementar,
+  });
+
+  final ObtenerContador obtenerContador;
+  final Incrementar incrementar;
+  final Decrementar decrementar;
 
   // This widget is the root of your application.
   @override
@@ -30,7 +56,11 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: PantallaVisor(
+        obtenerContador: obtenerContador,
+        incrementar: incrementar,
+        decrementar: decrementar,
+      ),
     );
   }
 }
