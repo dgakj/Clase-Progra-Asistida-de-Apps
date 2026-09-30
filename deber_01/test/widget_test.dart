@@ -14,18 +14,10 @@ import 'package:deber_01/domain/usecases/obtener_contador.dart';
 import 'package:deber_01/main.dart';
 
 void main() {
-  testWidgets('incrementa el contador desde la pantalla de control', (
+  testWidgets('vuelve desde Control y conserva el contador', (
     WidgetTester tester,
   ) async {
-    final repository = _FakeContadorRepository();
-    await tester.pumpWidget(
-      MyApp(
-        obtenerContador: ObtenerContador(repository),
-        incrementar: Incrementar(repository),
-        decrementar: Decrementar(repository),
-      ),
-    );
-    await tester.pumpAndSettle();
+    await _pumpApp(tester);
 
     expect(find.text('Contador: 0'), findsOneWidget);
 
@@ -39,6 +31,34 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Contador: 1'), findsOneWidget);
   });
+
+  testWidgets('el back del sistema vuelve y conserva el contador', (
+    WidgetTester tester,
+  ) async {
+    await _pumpApp(tester);
+
+    await tester.tap(find.text('Ir a Control'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('+1'));
+    await tester.pumpAndSettle();
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Contador: 1'), findsOneWidget);
+  });
+}
+
+Future<void> _pumpApp(WidgetTester tester) async {
+  final repository = _FakeContadorRepository();
+  await tester.pumpWidget(
+    MyApp(
+      obtenerContador: ObtenerContador(repository),
+      incrementar: Incrementar(repository),
+      decrementar: Decrementar(repository),
+    ),
+  );
+  await tester.pumpAndSettle();
 }
 
 class _FakeContadorRepository implements ContadorRepository {

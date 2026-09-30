@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'data/repositories/contador_prefs_repository.dart';
 import 'domain/usecases/decrementar.dart';
 import 'domain/usecases/incrementar.dart';
 import 'domain/usecases/obtener_contador.dart';
+import 'presentation/estado/contador_cubit.dart';
 import 'presentation/pantallas/pantalla_visor.dart';
 
 void main() {
+  Bloc.observer = ContadorBlocObserver();
+
   final repository = ContadorPrefsRepository();
-  final obtenerContador = ObtenerContador(repository);
-  final incrementar = Incrementar(repository);
-  final decrementar = Decrementar(repository);
 
   runApp(
     MyApp(
-      obtenerContador: obtenerContador,
-      incrementar: incrementar,
-      decrementar: decrementar,
+      obtenerContador: ObtenerContador(repository),
+      incrementar: Incrementar(repository),
+      decrementar: Decrementar(repository),
     ),
   );
+}
+
+class ContadorBlocObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
+    if (bloc is ContadorCubit) {
+      debugPrint(
+        '${bloc.runtimeType}: ${change.currentState} -> ${change.nextState}',
+      );
+    }
+    super.onChange(bloc, change);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -36,9 +49,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return BlocProvider(
+      create: (_) => ContadorCubit(
+        obtenerContador: obtenerContador,
+        incrementarUseCase: incrementar,
+        decrementarUseCase: decrementar,
+      )..cargar(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -55,11 +74,8 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: PantallaVisor(
-        obtenerContador: obtenerContador,
-        incrementar: incrementar,
-        decrementar: decrementar,
+        ),
+        home: const PantallaVisor(),
       ),
     );
   }
