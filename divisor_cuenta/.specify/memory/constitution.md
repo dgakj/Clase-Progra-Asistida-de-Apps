@@ -1,50 +1,52 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version: unratified template → 1.0.0
+Modified principles: replaced template placeholders with the five requested SOLID principles.
+Added sections: architecture and security; tests and student explainability.
+Removed sections: none.
+Deferred items: remove this report before committing, as it is review scratch material.
+-->
+
+# Constitución del divisor de cuenta
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Single Responsibility Principle (SRP)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Cada clase tendrá una sola razón de cambio. El cálculo de la división no validará entradas ni dará formato a los resultados.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Open-Closed Principle (OCP)
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+El cálculo permitirá agregar una nueva regla de redondeo sin modificar las clases de cálculo existentes.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Liskov Substitution Principle (LSP)
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Cualquier implementación de una interfaz podrá sustituir a otra sin que quien la use tenga que consultar su tipo concreto.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Interface Segregation Principle (ISP)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Las interfaces serán pequeñas. Ninguna clase dependerá de métodos que no utiliza.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Dependency Inversion Principle (DIP)
+
+La capa de presentación dependerá de abstracciones definidas en el dominio y nunca de clases concretas de datos.
+
+## Arquitectura y seguridad
+
+- El código se organizará en las capas `presentation`, `domain` y `data`.
+- La regla de dependencia será `presentation → domain ← data`.
+- `lib/domain/` será Dart puro y no importará `package:flutter`.
+- `main.dart` será el único lugar donde se instancien implementaciones concretas.
+- No se guardarán secretos ni claves de API en el repositorio.
+
+## Calidad, pruebas y regla de la materia
+
+- Toda funcionalidad crítica tendrá pruebas.
+- Los criterios de aceptación de cada especificación se convertirán en pruebas ejecutables.
+- El estudiante deberá poder explicar cada función generada: qué hace, por qué existe, qué recibe, qué devuelve y qué errores produce.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Esta constitución define las reglas de calidad y arquitectura del proyecto. Las especificaciones, planes, implementaciones y revisiones deberán comprobar su cumplimiento. Toda enmienda se documentará mediante una actualización de versión semántica: PATCH para aclaraciones sin cambio de significado, MINOR para agregar principios o secciones y MAJOR para eliminar o redefinir reglas existentes.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-10-01 | **Last Amended**: 2026-10-01
