@@ -1,6 +1,6 @@
 # Quickstart: Dividir cuenta
 
-Esta guía se ejecuta desde la raíz del proyecto `divisor_cuenta`, después de implementar la feature. No se ejecutaron estos comandos durante la fase de planificación.
+Esta guía se ejecuta desde la raíz del proyecto `divisor_cuenta`.
 
 ## Prerrequisitos
 
@@ -22,7 +22,7 @@ flutter analyze
 flutter test
 ```
 
-Resultado esperado: el análisis termina sin errores y las pruebas de dominio/widget cubren los seis escenarios de aceptación. La prueba de contador que trae el template debe reemplazarse durante la implementación por pruebas del divisor, con autorización para modificar `test/`.
+Resultado verificado: `flutter analyze` terminó sin hallazgos y `flutter test` pasó las 13 pruebas, incluidas las seis pruebas de pantalla para los escenarios de aceptación. La prueba del contador inicial se reemplazó por pruebas del divisor.
 
 ## Ejecución manual
 

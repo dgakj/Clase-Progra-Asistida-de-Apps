@@ -22,16 +22,16 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 
 **Propósito**: Dejar el proyecto alineado con el plan Flutter sin paquetes externos.
 
-- [ ] T001 Retirar `cupertino_icons` y `flutter_lints` de `pubspec.yaml`, conservando las dependencias del SDK Flutter necesarias.
-- [ ] T002 Ajustar `analysis_options.yaml` para que no dependa de `flutter_lints`.
-- [ ] T003 [P] Crear las carpetas `lib/domain/`, `lib/data/` y `lib/presentation/`.
+- [X] T001 Retirar `cupertino_icons` y `flutter_lints` de `pubspec.yaml`, conservando las dependencias del SDK Flutter necesarias.
+- [X] T002 Ajustar la configuración de análisis para que no dependa de `flutter_lints`.
+- [X] T003 [P] Crear las carpetas `lib/domain/`, `lib/data/` y `lib/presentation/`.
 
 ## Fase 2: Fundamentos compartidos
 
 **Propósito**: Establecer contratos y tipos comunes requeridos por las historias.
 
-- [ ] T004 Crear la interfaz Dart pura `EstrategiaRedondeo` en `lib/domain/estrategia_redondeo.dart`, con un único método para transformar el importe.
-- [ ] T005 Crear `ModoRedondeo` en `lib/domain/modo_redondeo.dart` para identificar las opciones exacto y hacia arriba sin depender de `data`.
+- [X] T004 Crear la interfaz Dart pura `EstrategiaRedondeo` en `lib/domain/estrategia_redondeo.dart`, con un único método para transformar el importe.
+- [X] T005 Crear `ModoRedondeo` en `lib/domain/modo_redondeo.dart` para identificar las opciones exacto y hacia arriba sin depender de `data`.
 
 **Punto de control**: Las abstracciones compartidas existen y `lib/domain/` no importa `package:flutter`.
 
@@ -43,21 +43,21 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 
 ### Pruebas de la historia 1
 
-- [ ] T006 [P] [US1] Registrar los escenarios de cálculo exacto 1 y 2 como datos reutilizables en `test/casos_de_prueba.dart`.
-- [ ] T007 [P] [US1] Crear pruebas unitarias de suma de propina, división y redondeo exacto en `test/division_test.dart`.
-- [ ] T008 [US1] Crear prueba de widget del flujo válido exacto y sus campos en `test/pantalla_test.dart`.
+- [X] T006 [P] [US1] Registrar los escenarios de cálculo exacto 1 y 2 como datos reutilizables en `test/casos_de_prueba.dart`.
+- [X] T007 [P] [US1] Crear pruebas unitarias de suma de propina, división y redondeo exacto en `test/division_test.dart`.
+- [X] T008 [US1] Crear prueba de widget del flujo válido exacto y sus campos en `test/pantalla_test.dart`.
 
 ### Implementación de la historia 1
 
-- [ ] T009 [P] [US1] Crear la entidad `Cuenta` con monto, personas y porcentaje de propina en `lib/domain/cuenta.dart`.
-- [ ] T010 [P] [US1] Crear la entidad `Resultado` con el pago por persona en `lib/domain/resultado.dart`.
-- [ ] T011 [US1] Implementar validación de los textos de entrada y los errores requeridos en `lib/domain/validar_entrada.dart`.
-- [ ] T012 [US1] Implementar el cálculo de total con propina, división y delegación a `EstrategiaRedondeo` en `lib/domain/calcular_division.dart`; mantenerlo sin validación ni formato.
-- [ ] T013 [US1] Implementar el redondeo exacto al centavo más cercano en `lib/data/redondeo_exacto.dart`.
-- [ ] T014 [US1] Implementar `DivisorController` con dependencias de dominio inyectadas por constructor en `lib/presentation/divisor_controller.dart`.
-- [ ] T015 [US1] Implementar formato monetario con dos decimales en `lib/presentation/formateador_moneda.dart`.
-- [ ] T016 [US1] Crear la pantalla de una vista con campos y estado local `setState` en `lib/presentation/pantalla_divisor.dart`.
-- [ ] T017 [US1] Componer las dependencias concretas desde `main.dart` y mostrar `PantallaDivisor` en `lib/main.dart`.
+- [X] T009 [P] [US1] Crear la entidad `Cuenta` con monto, personas y porcentaje de propina en `lib/domain/cuenta.dart`.
+- [X] T010 [P] [US1] Crear la entidad `Resultado` con el pago por persona en `lib/domain/resultado.dart`.
+- [X] T011 [US1] Implementar validación de los textos de entrada y los errores requeridos en `lib/domain/validar_entrada.dart`.
+- [X] T012 [US1] Implementar el cálculo de total con propina, división y delegación a `EstrategiaRedondeo` en `lib/domain/calcular_division.dart`; mantenerlo sin validación ni formato.
+- [X] T013 [US1] Implementar el redondeo exacto al centavo más cercano en `lib/data/redondeo_exacto.dart`.
+- [X] T014 [US1] Implementar `DivisorController` con dependencias de dominio inyectadas por constructor en `lib/presentation/divisor_controller.dart`.
+- [X] T015 [US1] Implementar formato monetario con dos decimales en `lib/presentation/formateador_moneda.dart`.
+- [X] T016 [US1] Crear la pantalla de una vista con campos, elección del modo de redondeo y estado local `setState` en `lib/presentation/pantalla_divisor.dart`.
+- [X] T017 [US1] Componer las dependencias concretas desde `main.dart` y mostrar `PantallaDivisor` en `lib/main.dart`.
 
 **Punto de control**: Los dos escenarios exactos de la historia se pueden ejecutar en pruebas y la pantalla funciona sin conexión.
 
@@ -69,16 +69,16 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 
 ### Pruebas de la historia 2
 
-- [ ] T018 [P] [US2] Añadir los dos resultados de redondeo a los casos reutilizables en `test/casos_de_prueba.dart`.
-- [ ] T019 [US2] Probar que las dos implementaciones son sustituibles mediante `EstrategiaRedondeo` en `test/division_test.dart`.
-- [ ] T020 [US2] Probar selección de modos y resultados `3.33`/`4.00` en `test/pantalla_test.dart`.
+- [X] T018 [P] [US2] Añadir los dos resultados de redondeo a los casos reutilizables en `test/casos_de_prueba.dart`.
+- [X] T019 [US2] Probar que las dos implementaciones son sustituibles mediante `EstrategiaRedondeo` en `test/division_test.dart`.
+- [X] T020 [US2] Probar selección de modos y resultados `3.33`/`4.00` en `test/pantalla_test.dart`.
 
 ### Implementación de la historia 2
 
-- [ ] T021 [P] [US2] Implementar redondeo al entero igual o superior en `lib/data/redondeo_hacia_arriba.dart`.
-- [ ] T022 [US2] Inyectar las estrategias por constructor y resolver la selección usando `ModoRedondeo` en `lib/presentation/divisor_controller.dart`, sin importar clases concretas de `data`.
-- [ ] T023 [US2] Añadir a la pantalla el selector de modo exacto/hacia arriba en `lib/presentation/pantalla_divisor.dart`.
-- [ ] T024 [US2] Registrar ambas implementaciones en el punto único de composición `lib/main.dart`.
+- [X] T021 [P] [US2] Implementar redondeo al entero igual o superior en `lib/data/redondeo_hacia_arriba.dart`.
+- [X] T022 [US2] Inyectar las estrategias por constructor y resolver la selección usando `ModoRedondeo` en `lib/presentation/divisor_controller.dart`, sin importar clases concretas de `data`.
+- [X] T023 [US2] Ofrecer en el selector los modos exacto y hacia arriba en `lib/presentation/pantalla_divisor.dart`.
+- [X] T024 [US2] Registrar ambas implementaciones en el punto único de composición `lib/main.dart`.
 
 **Punto de control**: Los dos modos pasan sus escenarios y agregar una estrategia no requiere cambiar `CalcularDivision`.
 
@@ -90,15 +90,15 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 
 ### Pruebas de la historia 3
 
-- [ ] T025 [P] [US3] Añadir los casos de cero personas y monto no numérico a `test/casos_de_prueba.dart`.
-- [ ] T026 [P] [US3] Probar errores de validación y ausencia de resultado en `test/division_test.dart`.
-- [ ] T027 [US3] Probar los mensajes `Debe haber al menos una persona` y `Monto inválido` y la ausencia de resultado en `test/pantalla_test.dart`.
+- [X] T025 [P] [US3] Añadir los casos de cero personas y monto no numérico a `test/casos_de_prueba.dart`.
+- [X] T026 [P] [US3] Probar errores de validación y ausencia de resultado en `test/division_test.dart`.
+- [X] T027 [US3] Probar los mensajes `Debe haber al menos una persona` y `Monto inválido` y la ausencia de resultado en `test/pantalla_test.dart`.
 
 ### Implementación de la historia 3
 
-- [ ] T028 [US3] Completar la precedencia y mensajes de validación para cero personas y monto no numérico en `lib/domain/validar_entrada.dart`.
-- [ ] T029 [US3] Actualizar el controlador para reemplazar el resultado anterior por el estado de error cuando falla la validación en `lib/presentation/divisor_controller.dart`.
-- [ ] T030 [US3] Mostrar mensajes de validación y ocultar resultados inválidos en `lib/presentation/pantalla_divisor.dart`.
+- [X] T028 [US3] Completar la precedencia y mensajes de validación para cero personas y monto no numérico en `lib/domain/validar_entrada.dart`.
+- [X] T029 [US3] Actualizar el controlador para reemplazar el resultado anterior por el estado de error cuando falla la validación en `lib/presentation/divisor_controller.dart`.
+- [X] T030 [US3] Mostrar mensajes de validación y ocultar resultados inválidos en `lib/presentation/pantalla_divisor.dart`.
 
 **Punto de control**: Los seis escenarios de aceptación son verificables y los dos errores no muestran resultado.
 
@@ -106,11 +106,11 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 
 **Propósito**: Comprobar estructura, restricciones y ejecución descritas por el plan.
 
-- [ ] T031 [P] Revisar que `lib/domain/` no importe Flutter y que las dependencias respeten presentation → domain ← data.
-- [ ] T032 Ejecutar `flutter pub get` desde `divisor_cuenta/` después de los cambios al manifiesto.
-- [ ] T033 Ejecutar `flutter analyze` desde `divisor_cuenta/` y resolver los hallazgos de esta app.
-- [ ] T034 Ejecutar `flutter test` desde `divisor_cuenta/` y confirmar los seis escenarios de aceptación.
-- [ ] T035 [P] Completar la guía de ejecución y verificación en `specs/001-dividir-cuenta/quickstart.md`.
+- [X] T031 [P] Revisar que `lib/domain/` no importe Flutter y que las dependencias respeten presentation → domain ← data.
+- [X] T032 Ejecutar `flutter pub get` desde `divisor_cuenta/` después de los cambios al manifiesto.
+- [X] T033 Ejecutar `flutter analyze` desde `divisor_cuenta/` y resolver los hallazgos de esta app.
+- [X] T034 Ejecutar `flutter test` desde `divisor_cuenta/` y confirmar los seis escenarios de aceptación.
+- [X] T035 [P] Completar la guía de ejecución y verificación en `specs/001-dividir-cuenta/quickstart.md`.
 
 ## Dependencias y orden de ejecución
 
@@ -137,6 +137,6 @@ description: "Tareas de implementación de la app para dividir una cuenta"
 ## Notas
 
 - La tarea de pruebas está incluida por los requisitos de la Constitución y de aceptación; su ejecución corresponde a la implementación, no a esta generación del plan.
-- No empezar cambios en `test/` hasta que el usuario autorice la fase de implementación, conforme a `AGENTS.md`.
+- Se modificó `test/` en esta implementación autorizada para reemplazar la prueba inicial del contador por pruebas del divisor.
 - Mantener nombres en español, null safety, sin persistencia ni servicios de red.
 - No modificar `android/` ni `ios/`.

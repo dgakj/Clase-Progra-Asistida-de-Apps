@@ -55,7 +55,7 @@ specs/001-dividir-cuenta/
 ├── data-model.md
 ├── quickstart.md
 ├── checklists/requirements.md
-└── tasks.md                 # Se generará en la fase $speckit-tasks
+└── tasks.md
 ```
 
 No se crea `contracts/`: la app no expone APIs ni integra servicios externos.
@@ -70,7 +70,8 @@ lib/
 │   ├── resultado.dart
 │   ├── calcular_division.dart
 │   ├── validar_entrada.dart
-│   └── estrategia_redondeo.dart   # Interfaz y modo de redondeo
+│   ├── estrategia_redondeo.dart
+│   └── modo_redondeo.dart
 ├── data/
 │   ├── redondeo_exacto.dart
 │   └── redondeo_hacia_arriba.dart
