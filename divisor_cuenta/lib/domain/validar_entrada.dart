@@ -52,6 +52,12 @@ class ValidarEntrada implements ValidadorEntrada {
       return const ResultadoValidacion.invalida('Propina inválida');
     }
 
+    if (propinaConvertida > 100) {
+      return const ResultadoValidacion.invalida(
+        'La propina no puede superar el 100%',
+      );
+    }
+
     return ResultadoValidacion.valida(
       Cuenta(
         montoTotal: montoConvertido,
