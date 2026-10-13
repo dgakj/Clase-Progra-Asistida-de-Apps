@@ -38,6 +38,26 @@ void main() {
     });
   }
 
+  test('rechaza una propina mayor al 100%', () {
+    final validacion = ValidarEntrada().ejecutar(
+      monto: '100',
+      personas: '4',
+      propina: '150',
+    );
+
+    expect(validacion.error, 'La propina no puede superar el 100%');
+  });
+
+  test('permite una propina exactamente del 100%', () {
+    final validacion = ValidarEntrada().ejecutar(
+      monto: '100',
+      personas: '4',
+      propina: '100',
+    );
+
+    expect(validacion.error, isNull);
+  });
+
   test('CalcularDivision sustituye una estrategia por otra (LSP)', () {
     final calculadora = CalcularDivision();
     const cuenta = Cuenta(

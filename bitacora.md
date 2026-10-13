@@ -4,15 +4,15 @@ La comparación entre las ramas **vibe** y **SDD** se registrará con evidencia 
 
 | Criterio | Rama vibe | Rama SDD |
 |---|---|---|
-| Iteraciones (veces que se tuvo que volver a pedir algo) | 9 | 6 |
-| Casos de aceptación que cumple (0–6) | 6/6 por inspección del código; falta ejecución manual | Pendiente |
-| Pruebas automatizadas que pasan | No ejecutadas; la prueba existente todavía comprueba el contador y no el divisor | Pendiente |
-| Archivos en `lib/` | 1 | Pendiente |
-| Líneas de código en `lib/` | 249 líneas (conteo de `Get-Content`) | Pendiente |
-| ¿`domain/` depende de Flutter? | No existe `domain/` (no aplica) | Pendiente |
-| ¿Existe separación `presentation/domain/data`? | No | Pendiente |
-| ¿El agente agregó algo que nadie pidió? | Sí: selector de redondeo exacto/hacia arriba, no mencionado en la solicitud inicial | Pendiente |
-| ¿Se puede agregar otra estrategia sin modificar el cálculo existente? | No; los modos se resuelven con una condición dentro del cálculo de la pantalla | Pendiente |
+| Iteraciones (veces que se tuvo que volver a pedir algo) | 9 | 10 |
+| Casos de aceptación que cumple (0–6) | 6/6 por inspección del código; falta ejecución manual | 6/6 cubiertos entre pruebas de dominio y pantalla |
+| Pruebas automatizadas que pasan | No ejecutadas; la prueba existente todavía comprueba el contador y no el divisor | 10 (7 de dominio y 3 de pantalla) |
+| Archivos en `lib/` | 1 | 12 |
+| Líneas de código en `lib/` | 249 líneas (conteo de `Get-Content`) | 399 líneas (conteo de `Get-Content`) |
+| ¿`domain/` depende de Flutter? | No existe `domain/` (no aplica) | No |
+| ¿Existe separación `presentation/domain/data`? | No | Sí |
+| ¿El agente agregó algo que nadie pidió? | Sí: selector de redondeo exacto/hacia arriba, no mencionado en la solicitud inicial | No; ambos modos están en la especificación |
+| ¿Se puede agregar otra estrategia sin modificar el cálculo existente? | No; los modos se resuelven con una condición dentro del cálculo de la pantalla | Sí; `CalcularDivision` recibe `EstrategiaRedondeo` |
 
 ## Registro de avances
 
@@ -28,3 +28,11 @@ La comparación entre las ramas **vibe** y **SDD** se registrará con evidencia 
 - Rama `sdd`: se creó `divisor_cuenta/AGENTS.md` con descripción, estructura y regla de dependencias, estándares, límites de cambios y comandos. El código de la app no se modificó en este paso.
 - Rama `sdd`: se creó `.specify/memory/constitution.md` en versión inicial 1.0.0, con los cinco principios SOLID pedidos, arquitectura, seguridad, pruebas y regla de explicabilidad. No se modificaron archivos de la app ni pruebas. El informe HTML temporal al inicio debe quitarse antes del commit.
 - Rama `sdd`: se generó `specs/001-dividir-cuenta/tasks.md` con 35 tareas organizadas en preparación, fundamentos y las tres historias de usuario. Se planificaron pruebas para los seis escenarios y verificación de arquitectura; no se modificó código ni `test/` en esta iteración.
+- Rama `sdd`: con `$speckit-implement` se completaron las 35 tareas. La app quedó separada en `presentation`, `domain` y `data`, con selector de redondeo, validación, propina y cálculo local. Se retiraron `cupertino_icons` y `flutter_lints`; no se añadieron dependencias directas externas.
+- Rama `sdd`: se sustituyó la prueba inicial del contador por pruebas unitarias y de pantalla. `flutter analyze` terminó sin hallazgos y `flutter test` pasó las 13 pruebas, incluyendo los seis escenarios. No se ejecutó la app manualmente en un dispositivo ni se comprobó allí el modo sin conexión.
+- La revisión final de arquitectura añadió abstracciones de dominio para validación y cálculo; `DivisorController` depende de esos contratos y de `EstrategiaRedondeo`. Tras ese ajuste se repitieron `flutter analyze` (sin hallazgos) y `flutter test` (13 aprobadas). Las 35 tareas quedaron marcadas como completadas.
+- Se aplicó `dart format` y se dejó `analysis_options.yaml` local sin `flutter_lints` para evitar heredar la configuración del repositorio padre.
+- Se repitió `$speckit-implement` para confirmar el estado final: 35/35 tareas completas, checklist 16/16, `flutter analyze` sin hallazgos y `flutter test` con 13 aprobadas. No se requirieron cambios adicionales en el código.
+- Iteración actual: `test/division_test.dart` se rehízo para recorrer `casos`, validar directamente con `ValidarEntrada` y calcular solo entradas válidas; incluye una prueba LSP que sustituye ambas estrategias sin condicionales ni conversiones. Sus 7 pruebas pasan y `flutter analyze lib` no encuentra problemas.
+- La suite completa ahora no compila porque `test/pantalla_test.dart` aún usa `casosAceptacion`, nombre que no existe en el fixture actual (`casos`). El usuario indicó no corregir archivos de `test/` fuera de la prueba solicitada; T034 queda pendiente hasta resolver esa referencia. No se cambió código de `lib/` porque el fallo está en `test/`.
+- A solicitud del usuario, se reemplazó `test/pantalla_test.dart` por tres pruebas de widget: cálculo de 27.50, cero personas sin resultado y monto `abc`. Se ajustó la pantalla para que el texto del resultado sea exactamente el importe con dos decimales. La suite completa pasa 10/10 y `flutter analyze` no reporta problemas; T034 vuelve a completarse.
