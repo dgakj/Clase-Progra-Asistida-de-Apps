@@ -1,0 +1,10 @@
+# Configuración local sin reglas que dependan de paquetes externos.
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
