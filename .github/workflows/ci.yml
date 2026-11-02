@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: divisor-cuenta-app
+        working-directory: divisor-cuenta-app/divisor_cuenta
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
